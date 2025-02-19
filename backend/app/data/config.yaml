@@ -1,0 +1,4 @@
+data_source: "https://coivdla.com/api/data"
+simulation:
+  initial_infected: 20
+  simulation_steps: 50

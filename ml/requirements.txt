@@ -1,0 +1,4 @@
+gym==0.26.2
+numpy==1.23.0
+stable-baselines3==1.6.0
+torch==1.13.1

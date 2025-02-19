@@ -1,0 +1,13 @@
+{
+    "name": "kenkomirai",
+    "version": "1.0.0",
+    "private": true,
+    "workspaces": [
+        "frontend",
+        "backend",
+        "ml"
+    ],
+    "scripts": {
+        "start": "echo 'Use docker-compose to start all services'"
+    }
+}

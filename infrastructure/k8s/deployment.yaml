@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: covid-simulation-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: covid-simulation
+  template:
+    metadata:
+      labels:
+        app: covid-simulation
+    spec:
+      containers:
+        - name: backend
+          image: your-docker-registry/covid-simulation-backend:latest
+          ports:
+            - containerPort: 8000
+        - name: frontend
+          image: your-docker-registry/covid-simulation-frontend:latest
+          ports:
+            - containerPort: 3000
