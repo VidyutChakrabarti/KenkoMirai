@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?><metadata>
+    <idinfo>
+        <citation>
+            <citeinfo>
+                <title>CT20FIP20CSA_Pop20_Pov20</title>
+                <geoform>vector digital data</geoform>
+            </citeinfo>
+        </citation>
+        <descript>
+            <abstract>Tabular data of population by age groups, race and gender, and the poverty by race is attached to the split tract geography to create this split tract with population and poverty data. Split tract data is the product of 2020 census tracts split by 2020 incorporated city boundaries and unincorporated community/countywide statistical areas (CSA) boundaries. The census tract boundaries have been altered and aligned where necessary with legal city boundaries and unincorporated areas, including shoreline/coastal areas. Census Tract:Every 10 years the Census Bureau counts the population of the United States as mandated by Constitution. The Census Bureau (https://www.census.gov/) released 2020 geographic boundaries data including census tracts for the analysis and mapping of demographic information across the United States. City Boundary:City Boundary data is the base map information for the County of Los Angeles. These City Boundaries are based on the Los Angeles County Seamless Cadastral Landbase. The Landbase is jointly maintained by the Los Angeles County Assessor and the Los Angeles County Department of Public Works (DPW). This layer represents current city boundaries within Los Angeles County. The DPW provides the most current shapefiles representing city boundaries and city annexations. True, legal boundaries are only determined on the ground by surveyors licensed in the State of California.Countywide Statistical Areas (CSA): The countywide Statistical Area (CSA) was defined to provide a common geographic boundary for reporting departmental statistics for unincorporated areas and incorporated Los Angeles city to the Board of Supervisors. The CSA boundary and CSA names are established by the CIO and the LA County Enterprise GIS group worked with the Los Angeles County Board of Supervisors Unincorporated Area and Field Deputies that reflect as best as possible the general name preferences of residents and historical names of areas. This data is primarily focused on broad statistics and reporting, not mapping of communities. This data is not designed to perfectly represent communities, nor jurisdictional boundaries such as Angeles National Forest. CSA represent board approved geographies comprised of Census block groups split by cities.Data Field:CT20: 2020 Census tractFIP21: 2020 City FIP CodeCITY: City name for incorporated cities and “Unincorporated” for unincorporated areas (as of July 1, 2020) CSA: Countywide Statistical Area (CSA) - Unincorporated area community names and LA City neighborhood names.CT20FIP21CSA: 2020 census tract with 2020 city FIPs for incorporated cities, unincorporated areas and LA neighborhoods. SPA22: 2022 Service Planning Area (SPA) number.SPA_NAME: Service Planning Area name.HD22: 2022 Health District (HD) number: HD_NAME: Health District name.POP20_AGE_0_4: 2020 population 0 to 4 years oldPOP20_AGE_5_9: 2020 population 5 to 9 years old POP20_AGE_10_14: 2020 population 10 to 14 years old POP20_AGE_15_17: 2020 population 15 to 17 years old POP20_AGE_18_19: 2020 population 18 to 19 years old POP20_AGE_20_44: 2020 population 20 to 24 years old POP20_AGE_25_29: 2020 population 25 to 29 years old POP20_AGE_30_34: 2020 population 30 to 34 years old POP20_AGE_35_44: 2020 population 35 to 44 years old POP20_AGE_45_54: 2020 population 45 to 54 years old POP20_AGE_55_64: 2020 population 55 to 64 years old POP20_AGE_65_74: 2020 population 65 to 74 years old POP20_AGE_75_84: 2020 population 75 to 84 years old POP20_AGE_85_100: 2020 population 85 years and older POP20_WHITE: 2020 Non-Hispanic White POP20_BLACK: 2020 Non-Hispanic African AmericanPOP20_AIAN: 2020 Non-Hispanic American Indian or Alaska NativePOP20_ASIAN: 2020 Non-Hispanic Asian POP20_HNPI: 2020 Non-Hispanic Hawaiian Native or Pacific IslanderPOP20_HISPANIC: 2020 HispanicPOP20_MALE: 2020 Male POP20_FEMALE: 2020 Female POV20_WHITE: 2020 Non-Hispanic White below 100% Federal Poverty Level POV20_BLACK: 2020 Non-Hispanic African American below 100% Federal Poverty Level POV20_AIAN: 2020 Non-Hispanic American Indian or Alaska Native below 100% Federal Poverty Level POV20_ASIAN: 2020 Non-Hispanic Asian below 100% Federal Poverty Level POV20_HNPI: 2020 Non-Hispanic Hawaiian Native or Pacific Islander below 100% Federal Poverty Level POV20_HISPANIC: 2020 Hispanic below 100% Federal Poverty Level POV20_TOTAL: 2020 Total population below 100% Federal Poverty Level POP20_TOTAL: 2020 Total PopulationAREA_SQMIL: Area in square milePOP20_DENSITY: Population per square mile.POV20_PERCENT: Poverty rate/percentage.How this data created?The tabular data of population by age groups, by ethnic groups and by gender, and the poverty by ethnic groups is attributed to the split tract geography to create this data. Split tract polygon data is created by intersecting 2020 census tract polygons, LA Country City Boundary polygons and Countywide Statistical Areas (CSA) polygon data. The resulting polygon boundary aligned and matched with the legal city boundary whenever possible. Note:1. Population and poverty data estimated as of July 1, 2019.2. 2010 Census tract and 2020 census tracts are not the same. Similarly, city and community boundary are not the same because boundary is reviewed and updated annually.</abstract>
+            <purpose>This population and poverty data at split tract geography is created by attributing population and poverty information to the split tract geography. Split tract is the product of 2020 census tract boundaries split by LA County legal city boundaries and unincorporated areas (commonly known as CSA) as of July 1, 2020.</purpose>
+        </descript>
+        <spdom>
+            <bounding>
+                <westbc>-118.953455</westbc>
+                <eastbc>-117.644097</eastbc>
+                <northbc>34.823531</northbc>
+                <southbc>32.803296</southbc>
+            </bounding>
+        </spdom>
+        <keywords>
+            <theme>
+                <themekt>None</themekt>
+                <themekey>Legal City</themekey>
+                <themekey>City</themekey>
+                <themekey>Incorporated City</themekey>
+                <themekey>Unincorporated Area</themekey>
+                <themekey>CSA</themekey>
+                <themekey>Census Tract</themekey>
+                <themekey>Tracts</themekey>
+                <themekey>Split Census Tract</themekey>
+                <themekey>population</themekey>
+                <themekey>poverty</themekey>
+            </theme>
+        </keywords>
+        <accconst>None</accconst>
+        <useconst>This data is for demographic tabulation purposes only and may not have been prepared for or be suitable for geoprocessing analysis, and/or for legal, engineering, or surveying intents. Users of this information should review or consult the primary data and information sources to ascertain the usability of the information.The County of Los Angeles provides this data with no claim as to the completeness, usefulness, or accuracy of its content, positional or otherwise. The user hereby acknowledges that the data is subject to change and that its accuracy cannot be guaranteed. The County and its officials and employees make no warranty, express or implied, and assume no legal liability or responsibility for the ability of users to fulfill their intended purposes in accessing or using this data. The data could include technical inaccuracies and typographical errors. The data is presented "as is," without warranty of any kind, including, but not limited to, the implied warranties of merchantability, fitness for a particular purpose, or non-infringement. </useconst>
+        <datacred>Census Bureau, Los Angeles County Internal Services Department (ISD), Los Angeles County Department of Public Work (DPW).
+This split tract polygon boundary data with population and poverty is created by ISD - GIS/eGIS Section.</datacred>
+        <native> Version 6.2 (Build 9200) ; Esri ArcGIS 10.9.1.28388</native>
+    </idinfo>
+    <spdoinfo>
+        <direct>Vector</direct>
+        <ptvctinf>
+            <sdtsterm>
+                <sdtstype>GT-polygon composed of chains</sdtstype>
+                <ptvctcnt>2879</ptvctcnt>
+            </sdtsterm>
+        </ptvctinf>
+    </spdoinfo>
+    <eainfo>
+        <detailed>
+            <enttyp>
+                <enttypl>CT20FIP20CSA_Pop20_Pov20</enttypl>
+            </enttyp>
+            <attr>
+                <attrlabl>OBJECTID</attrlabl>
+                <attrdef>Internal feature number.</attrdef>
+                <attrdefs>Esri</attrdefs>
+                <attrdomv>
+                                        
+                    <udom>Sequential unique whole numbers that are automatically generated.</udom>
+                                    
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>Shape</attrlabl>
+                <attrdef>Feature geometry.</attrdef>
+                <attrdefs>Esri</attrdefs>
+                <attrdomv>
+                                        
+                    <udom>Coordinates defining the features.</udom>
+                                    
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>CT20</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>FIP20</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>CITY</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>CSA</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>CT20FIP20CSA</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>SPA22</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>SPA_NAME</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>HD22</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>HD_NAME</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POP20_AGE_0_4</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POP20_AGE_5_9</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POP20_AGE_10_14</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POP20_AGE_15_17</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POP20_AGE_18_19</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POP20_AGE_20_24</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POP20_AGE_25_29</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POP20_AGE_30_34</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POP20_AGE_35_44</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POP20_AGE_45_54</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POP20_AGE_55_64</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POP20_AGE_65_74</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POP20_AGE_75_84</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POP20_AGE_85_100</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POP20_WHITE</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POP20_BLACK</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POP20_AIAN</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POP20_ASIAN</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POP20_HNPI</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POP20_HISPANIC</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POP20_MALE</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POP20_FEMALE</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POV20_WHITE</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POV20_BLACK</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POV20_AIAN</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POV20_ASIAN</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POV20_HNPI</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POV20_HISPANIC</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POP20_TOTAL</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POV20_TOTAL</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>AREA_SQMIL</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POP20_DENSITY</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POV20_PERCENT</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>Shape_Length</attrlabl>
+                <attrdef>Length of feature in internal units.</attrdef>
+                <attrdefs>Esri</attrdefs>
+                <attrdomv>
+                                        
+                    <udom>Positive real numbers that are automatically generated.</udom>
+                                    
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>Shape_Area</attrlabl>
+                <attrdef>Area of feature in internal units squared.</attrdef>
+                <attrdefs>Esri</attrdefs>
+                <attrdomv>
+                                        
+                    <udom>Positive real numbers that are automatically generated.</udom>
+                                    
+                </attrdomv>
+            </attr>
+        </detailed>
+    </eainfo>
+    <metainfo>
+        <metd>20240507</metd>
+        <metstdn>FGDC Content Standard for Digital Geospatial Metadata</metstdn>
+        <metstdv>FGDC-STD-001-1998</metstdv>
+        <mettc>local time</mettc>
+    </metainfo>
+</metadata>
