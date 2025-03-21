@@ -1,0 +1,26 @@
+{
+  "name": "la-covid-sim",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@chakra-ui/icons": "^2.0.17",
+    "@chakra-ui/react": "^2.6.0",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@tailwindcss/postcss": "^4.0.14",
+    "autoprefixer": "^10.4.21",
+    "framer-motion": "^7.6.8",
+    "leaflet": "^1.9.3",
+    "next": "latest",
+    "postcss": "^8.5.3",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-leaflet": "^4.2.1",
+    "swr": "^2.0.0",
+    "tailwindcss": "^4.0.14"
+  }
+}
