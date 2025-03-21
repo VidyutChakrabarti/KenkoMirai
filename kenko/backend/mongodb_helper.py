@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 
-MONGODB_URI = "mongodb+srv://chakrabartivr:X0LuDbGvnmeALpcR@covis.lzltl.mongodb.net/"
+MONGODB_URI = ""
 
 client = MongoClient(MONGODB_URI)
 db = client["la_sim_db"]
