@@ -35,14 +35,6 @@ Sample simulation of environment
   - **Backend:** A FastAPI server that hosts the simulation engine, agent-based modeling components, and chain-of-thought logic.
   - **ML/RL Module:** Scripts and notebooks for training RL agents using stable-baselines3 in a custom Gym environment.
 
-Some data visualizations:
-1. Census/COVID time data
-![Census-data](assets/census-data.webp)
-2. Pandemic time movement recordings
-![density](assets/density.webp)
-3. Covid infection rate
-![infection-spread](assets/infectionspread.webp)
-
 ### How It Works
 
 1. **Agent-Based Simulation:**  
@@ -59,7 +51,8 @@ Some data visualizations:
 
 ### Getting Started
 
-For complete setup and run instructions, please see the [docs/setup.md](docs/setup.md) file.
+For complete setup and run instructions, please see the [docs/setup.md](docs/setup.md) file.<br/>
+**Note: Maximum code/details of the project has been hidden to avoid reproducibility.**
 
 ### Quick Start (Using Docker Compose)
 
