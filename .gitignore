@@ -1,19 +1,16 @@
-# Node.js
+.env
+.sf/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
 node_modules/
 .next/
-dist/
-
-# Python
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-*.sqlite3
-.env
-venv/
-
-# Jupyter
-.ipynb_checkpoints/
-
-# Docker
-docker-compose.override.yml
+out/
+coverage/
+ml/models/
+*.log
+.DS_Store
