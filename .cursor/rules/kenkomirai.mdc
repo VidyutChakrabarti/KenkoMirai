@@ -1,0 +1,7 @@
+---
+description: KenkoMirai project architecture, safety, integrity, and coding workflow
+globs:
+alwaysApply: true
+---
+
+Read and follow @AGENTS.md as the authoritative repository instruction set. Also read @CURSOR.md for Cursor-specific workflow notes. If they differ, AGENTS.md wins.
