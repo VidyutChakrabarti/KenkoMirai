@@ -42,6 +42,8 @@ class SimulationManager:
 
     @contextmanager
     def _admit_compute(self, *, num_agents: int, steps: int) -> Iterator[None]:
+        if num_agents < 1 or steps < 1:
+            raise ValueError("num_agents and steps must be positive")
         work_units = num_agents * steps
         if work_units > self.settings.max_work_units:
             raise ValueError(
@@ -84,6 +86,10 @@ class SimulationManager:
         seed: int,
         policy: str,
     ) -> tuple[str, CovidEnvironment]:
+        if num_agents < 10:
+            raise ValueError("num_agents must be at least 10")
+        if initial_infected < 0 or initial_infected > num_agents:
+            raise ValueError("initial_infected must be between zero and num_agents")
         if num_agents > self.settings.max_agents:
             raise ValueError(f"num_agents cannot exceed {self.settings.max_agents}")
         now = time.monotonic()
@@ -160,6 +166,10 @@ class SimulationManager:
             }
 
     def history(self, simulation_id: str, *, after: int = -1, limit: int = 1_000) -> dict[str, object]:
+        if after < -1:
+            raise ValueError("after must be at least -1")
+        if limit < 1 or limit > 1_000:
+            raise ValueError("limit must be between 1 and 1000")
         session = self._get_session(simulation_id)
         with session.lock:
             matching = [item for item in session.environment.history if int(item["time"]) > after]
