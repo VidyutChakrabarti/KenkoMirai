@@ -22,6 +22,12 @@ def run_simulation(
     resources = resources or load_simulation_resources()
     agents = num_agents if num_agents is not None else settings.default_agents
     infected = initial_infected if initial_infected is not None else min(20, agents)
+    if agents < 10:
+        raise ValueError("num_agents must be at least 10")
+    if steps < 1:
+        raise ValueError("steps must be positive")
+    if infected < 0 or infected > agents:
+        raise ValueError("initial_infected must be between zero and num_agents")
     if agents > settings.max_agents:
         raise ValueError(f"num_agents cannot exceed {settings.max_agents}")
     if steps > settings.max_steps_per_request:

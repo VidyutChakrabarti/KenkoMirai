@@ -1,7 +1,9 @@
 import mesa
+import pytest
 
 from app.simulation.agent import Agent
 from app.simulation.environment import CovidEnvironment
+from app.simulation.simulation_engine import run_simulation
 
 
 def test_seed_reproduces_initial_state() -> None:
@@ -64,3 +66,16 @@ def test_multi_step_run_records_every_step() -> None:
     environment = CovidEnvironment(num_agents=50, initial_infected=3, seed=13)
     environment.run(10, "open")
     assert [item["time"] for item in environment.history] == list(range(11))
+
+
+@pytest.mark.parametrize(
+    ("kwargs", "message"),
+    [
+        ({"num_agents": 9}, "num_agents"),
+        ({"steps": 0}, "steps"),
+        ({"initial_infected": 501}, "initial_infected"),
+    ],
+)
+def test_batch_rejects_invalid_bounds(kwargs: dict[str, int], message: str) -> None:
+    with pytest.raises(ValueError, match=message):
+        run_simulation(**kwargs)

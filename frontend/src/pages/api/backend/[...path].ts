@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { randomUUID } from "node:crypto";
 
 const ALLOWED_METHODS = new Set(["GET", "POST", "DELETE"]);
 
@@ -9,13 +10,18 @@ function gatewayTimeout(): number {
 
 export default async function handler(request: NextApiRequest, response: NextApiResponse) {
   const method = request.method || "GET";
+  const requestId = typeof request.headers["x-request-id"] === "string"
+    ? request.headers["x-request-id"]
+    : randomUUID();
   if (!ALLOWED_METHODS.has(method)) {
     response.setHeader("Allow", [...ALLOWED_METHODS].join(", "));
+    response.setHeader("X-Request-ID", requestId);
     response.status(405).json({ detail: "method not allowed" });
     return;
   }
   const segments = Array.isArray(request.query.path) ? request.query.path : [];
   if (!segments.length || segments.some((segment) => segment === ".." || segment.includes("/"))) {
+    response.setHeader("X-Request-ID", requestId);
     response.status(400).json({ detail: "invalid backend path" });
     return;
   }
@@ -34,7 +40,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
       headers: {
         Accept: "application/json",
         ...(method === "POST" ? { "Content-Type": "application/json" } : {}),
-        ...(typeof request.headers["x-request-id"] === "string" ? { "X-Request-ID": request.headers["x-request-id"] } : {}),
+        "X-Request-ID": requestId,
       },
       body: method === "POST" ? JSON.stringify(request.body ?? {}) : undefined,
       signal: AbortSignal.timeout(gatewayTimeout()),
@@ -50,6 +56,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
     response.send(Buffer.from(await upstreamResponse.arrayBuffer()));
   } catch (error) {
     const timedOut = error instanceof Error && (error.name === "TimeoutError" || error.name === "AbortError");
+    response.setHeader("X-Request-ID", requestId);
     response.status(timedOut ? 504 : 502).json({ detail: timedOut ? "backend request timed out" : "backend service unavailable" });
   }
 }
