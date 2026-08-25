@@ -1,13 +1,12 @@
 {
-    "name": "kenkomirai",
-    "version": "1.0.0",
-    "private": true,
-    "workspaces": [
-        "frontend",
-        "backend",
-        "ml"
-    ],
-    "scripts": {
-        "start": "echo 'Use docker-compose to start all services'"
-    }
+  "name": "kenkomirai",
+  "version": "1.2.0",
+  "private": true,
+  "workspaces": ["frontend"],
+  "scripts": {
+    "dev": "npm run dev --workspace @kenkomirai/frontend",
+    "build": "npm run build --workspace @kenkomirai/frontend",
+    "start": "npm run start --workspace @kenkomirai/frontend",
+    "lint": "npm run lint --workspace @kenkomirai/frontend"
+  }
 }
