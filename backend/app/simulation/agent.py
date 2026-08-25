@@ -1,43 +1,81 @@
+from __future__ import annotations
+
+import math
 import random
 
-class Agent:
-    STATES = ('S', 'I', 'R', 'D')  # Susceptible, Infected, Recovered, Deceased
+import mesa
 
-    def __init__(self, agent_id, lat, lng, state='S', age=None, occupation=None, income=None, daily_routine=None):
+from app.simulation.routine import RoutineStop, destination_for_hour
+
+
+VALID_STATES = frozenset({"S", "E", "I", "R", "D"})
+
+
+class Agent(mesa.Agent):
+    def __init__(
+        self,
+        model: mesa.Model,
+        *,
+        agent_id: int,
+        lat: float,
+        lng: float,
+        home_lat: float,
+        home_lng: float,
+        state: str,
+        age: int,
+        occupation: str,
+        income: str,
+        daily_routine: tuple[RoutineStop, ...],
+    ) -> None:
+        super().__init__(model)
+        if state not in VALID_STATES:
+            raise ValueError(f"state must be one of {sorted(VALID_STATES)}")
         self.agent_id = agent_id
         self.lat = lat
         self.lng = lng
+        self.home_lat = home_lat
+        self.home_lng = home_lng
         self.state = state
-        self.infection_time = 0  # Count simulation steps since infection
-        # Extended attributes from our digital twin concept:
         self.age = age
         self.occupation = occupation
         self.income = income
-        self.daily_routine = daily_routine or []
-        self.current_destination = None
+        self.daily_routine = daily_routine
+        self.state_time = 0
 
-    def move(self, move_range, lockdown_factor=1.0):
-        # If the agent has a defined daily routine, move toward the current destination
-        if self.daily_routine:
-            if not self.current_destination:
-                self.current_destination = self.daily_routine[0]['destination']
-            dest_lat, dest_lng = self.current_destination
-            # Move a fraction toward destination (simple linear interpolation)
-            delta_lat = (dest_lat - self.lat) * 0.1 * lockdown_factor
-            delta_lng = (dest_lng - self.lng) * 0.1 * lockdown_factor
-            self.lat += delta_lat
-            self.lng += delta_lng
-            # Check if destination is reached; if so, cycle to the next event
-            if abs(self.lat - dest_lat) < 0.0005 and abs(self.lng - dest_lng) < 0.0005:
-                self.daily_routine.append(self.daily_routine.pop(0))
-                self.current_destination = self.daily_routine[0]['destination']
-        else:
-            # Default random movement if no routine exists
-            delta_lat = random.uniform(-move_range, move_range) * lockdown_factor
-            delta_lng = random.uniform(-move_range, move_range) * lockdown_factor
-            self.lat += delta_lat
-            self.lng += delta_lng
+    def move(
+        self,
+        *,
+        hour: int,
+        mobility_factor: float,
+        max_move_degrees: float,
+        bounds: tuple[float, float, float, float],
+        rng: random.Random,
+    ) -> None:
+        if self.state == "D" or mobility_factor <= 0:
+            return
+        target = destination_for_hour(self.daily_routine, hour)
+        delta_lat = target.latitude - self.lat
+        delta_lng = target.longitude - self.lng
+        distance = math.hypot(delta_lat, delta_lng)
+        max_move = max_move_degrees * mobility_factor
+        if distance > 0:
+            scale = min(1.0, max_move / distance)
+            self.lat += delta_lat * scale
+            self.lng += delta_lng * scale
+        jitter = max_move * 0.08
+        self.lat += rng.uniform(-jitter, jitter)
+        self.lng += rng.uniform(-jitter, jitter)
+        min_lat, max_lat, min_lng, max_lng = bounds
+        self.lat = min(max_lat, max(min_lat, self.lat))
+        self.lng = min(max_lng, max(min_lng, self.lng))
 
-    def distance_to(self, other):
-        # Euclidean distance (for simplicity)
-        return ((self.lat - other.lat) ** 2 + (self.lng - other.lng) ** 2) ** 0.5
+    def serialize(self) -> dict[str, int | float | str]:
+        return {
+            "id": self.agent_id,
+            "lat": round(self.lat, 6),
+            "lng": round(self.lng, 6),
+            "state": self.state,
+            "age": self.age,
+            "occupation": self.occupation,
+            "income": self.income,
+        }
