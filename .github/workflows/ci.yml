@@ -12,6 +12,13 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  ci-policy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v4
+      - run: node scripts/ci/validate_ci_policy.mjs
+
   backend:
     runs-on: ubuntu-latest
     timeout-minutes: 5
