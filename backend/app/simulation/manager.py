@@ -92,7 +92,6 @@ class SimulationManager:
             raise ValueError("initial_infected must be between zero and num_agents")
         if num_agents > self.settings.max_agents:
             raise ValueError(f"num_agents cannot exceed {self.settings.max_agents}")
-        now = time.monotonic()
         with self._lock:
             self._remove_expired_locked()
             self._check_session_capacity_locked(num_agents)
@@ -114,6 +113,7 @@ class SimulationManager:
                 mobility_multipliers=self.resources.mobility_multipliers,
                 mobility_dates=self.resources.mobility_dates,
             )
+        now = time.monotonic()
         with self._lock:
             self._remove_expired_locked()
             self._check_session_capacity_locked(num_agents)
