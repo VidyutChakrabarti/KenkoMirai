@@ -1,4 +1,10 @@
-data_source: "https://coivdla.com/api/data"
-simulation:
-  initial_infected: 20
-  simulation_steps: 50
+mobility_csv: "../../../initial datasets/la_mobilityreports.csv"
+population_shapefile: "../../../initial datasets/2020_Population/2020_Population_and_Poverty_at_Split_Tract.shp"
+required_columns:
+  - date
+  - retail_and_recreation_percent_change_from_baseline
+  - grocery_and_pharmacy_percent_change_from_baseline
+  - parks_percent_change_from_baseline
+  - transit_stations_percent_change_from_baseline
+  - workplaces_percent_change_from_baseline
+  - residential_percent_change_from_baseline
