@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kenkomirai
+  namespace: kenkomirai
+  labels:
+    app.kubernetes.io/part-of: kenkomirai
+spec:
+  tls:
+    - hosts:
+        - kenkomirai.example.com
+      secretName: kenkomirai-tls
+  rules:
+    - host: kenkomirai.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: kenkomirai-frontend
+                port:
+                  name: http

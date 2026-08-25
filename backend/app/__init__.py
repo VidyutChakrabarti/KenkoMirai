@@ -1,0 +1,1 @@
+"""KenkoMirai backend package."""

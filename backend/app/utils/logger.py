@@ -1,7 +1,6 @@
 import logging
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("covid_simulation")
 
-def log_info(message):
-    logger.info(message)
+def get_logger(name: str) -> logging.Logger:
+    """Return a namespaced logger configured by the application entry point."""
+    return logging.getLogger(f"kenkomirai.{name}")

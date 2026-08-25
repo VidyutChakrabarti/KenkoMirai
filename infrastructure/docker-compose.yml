@@ -1,18 +1,65 @@
-version: '3.8'
+name: kenkomirai
 
 services:
+  backend:
+    init: true
+    build:
+      context: ..
+      dockerfile: backend/Dockerfile
+    environment:
+      KENKOMIRAI_ENVIRONMENT: development
+      KENKOMIRAI_CORS_ORIGINS: http://localhost:3000
+      KENKOMIRAI_ALLOWED_HOSTS: localhost,127.0.0.1,backend
+      KENKOMIRAI_MAX_CONCURRENT_RUNS: "2"
+      KENKOMIRAI_MAX_WORK_UNITS: "2500000"
+      KENKOMIRAI_MAX_RETAINED_AGENTS: "50000"
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health', timeout=3)"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+    stop_grace_period: 30s
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+
   frontend:
-    build: ../frontend
+    init: true
+    build:
+      context: ..
+      dockerfile: frontend/Dockerfile
+    environment:
+      KENKOMIRAI_API_URL: http://backend:8000
+      KENKOMIRAI_GATEWAY_TIMEOUT_MS: "120000"
     ports:
       - "3000:3000"
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+    stop_grace_period: 30s
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
 
-  backend:
-    build: ../backend
-    ports:
-      - "8000:8000"
+  trainer:
+    profiles: ["training"]
+    build:
+      context: ..
+      dockerfile: ml/Dockerfile
+    volumes:
+      - model-artifacts:/workspace/ml/models
+    command: ["--timesteps", "50000", "--output", "/workspace/ml/models/ppo_seird"]
+    security_opt:
+      - no-new-privileges:true
 
-  ml:
-    build: ../ml
-    command: python training/train_rl_agent.py
+volumes:
+  model-artifacts:

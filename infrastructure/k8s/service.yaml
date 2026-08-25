@@ -1,12 +1,31 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: covid-simulation-service
+  name: kenkomirai-backend
+  namespace: kenkomirai
+  labels:
+    app.kubernetes.io/name: kenkomirai-backend
 spec:
+  type: ClusterIP
   selector:
-    app: covid-simulation
+    app.kubernetes.io/name: kenkomirai-backend
   ports:
-    - protocol: TCP
+    - name: http
+      port: 8000
+      targetPort: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kenkomirai-frontend
+  namespace: kenkomirai
+  labels:
+    app.kubernetes.io/name: kenkomirai-frontend
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: kenkomirai-frontend
+  ports:
+    - name: http
       port: 80
-      targetPort: 3000
-  type: LoadBalancer
+      targetPort: http

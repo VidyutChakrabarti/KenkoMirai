@@ -1,40 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+<div align="center">
 
-## Getting Started
+# KenkoMirai Web
 
-First, run the development server:
+### Same-origin scenario controls and dependency-light visualization
+
+<p>
+  <a href="../README.md"><img alt="Project overview" src="https://img.shields.io/badge/BACK-PROJECT_OVERVIEW-B8E7D1?style=for-the-badge&labelColor=101815&color=365D4D"></a>
+  <a href="../docs/setup.md"><img alt="Setup guide" src="https://img.shields.io/badge/OPEN-SETUP_GUIDE-B8E7D1?style=for-the-badge&labelColor=101815&color=477A65"></a>
+  <a href="../docs/gallery.md"><img alt="Project gallery" src="https://img.shields.io/badge/VIEW-PROJECT_GALLERY-B8E7D1?style=for-the-badge&labelColor=101815&color=365D4D"></a>
+</p>
+
+</div>
+
+---
+
+The canonical frontend is a Next.js application with overview, scenario-lab, and operations pages. Browser API requests use `/api/backend/*`; the server-side gateway forwards them to `KENKOMIRAI_API_URL/api/v1/*`. The gateway timeout is configured with `KENKOMIRAI_GATEWAY_TIMEOUT_MS` and distinguishes upstream failure (`502`) from timeout (`504`).
+
+No map tiles, marker assets, random browser data, Axios client, Leaflet runtime, or Chart.js lifecycle is required. Agent positions and a rolling 1,000-sample per-hour SEIRD trajectory render as accessible SVG; the API retains the configured full session history. The scenario ID is retained in session storage and restored with the bounded history endpoint after a page refresh.
+
+## Commands
+
+Run these from the repository root so the committed workspace lockfile is used:
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run lint
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Set `KENKOMIRAI_API_URL` in the Next.js server environment. Do not expose private backend hostnames through `NEXT_PUBLIC_*` variables.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Routes
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+| Route | Purpose |
+|---|---|
+| `/` | Product overview and model scope |
+| `/simulation` | Create and advance an interactive scenario |
+| `/dashboard` | API readiness and session capacity |
+| `/api/backend/[...path]` | Restricted GET/POST/DELETE API gateway |
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+See [the setup guide](../docs/setup.md) for container and Kubernetes operation.

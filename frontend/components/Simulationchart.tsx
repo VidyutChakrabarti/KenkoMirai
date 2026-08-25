@@ -1,36 +1,38 @@
-import React, { useEffect, useRef } from 'react';
-import Chart from 'chart.js/auto';
+import type { DiseaseState, SimulationSummary } from "../src/types/simulation";
 
-export default function SimulationChart({ history }) {
-    const chartRef = useRef(null);
+const SERIES: Array<{ key: DiseaseState; label: string; color: string }> = [
+  { key: "S", label: "Susceptible", color: "#8c9b95" },
+  { key: "E", label: "Exposed", color: "#d5ad68" },
+  { key: "I", label: "Infectious", color: "#df7d7d" },
+  { key: "R", label: "Recovered", color: "#70b899" },
+  { key: "D", label: "Deceased", color: "#575d5b" },
+];
 
-    useEffect(() => {
-        if (!chartRef.current || history.length === 0) return;
+function points(history: SimulationSummary[], state: DiseaseState, total: number) {
+  if (history.length === 1) return `0,${100 - (history[0].aggregate[state] / total) * 100} 100,${100 - (history[0].aggregate[state] / total) * 100}`;
+  return history.map((step, index) => {
+    const x = (index / (history.length - 1)) * 100;
+    const y = 100 - (step.aggregate[state] / total) * 100;
+    return `${x.toFixed(2)},${y.toFixed(2)}`;
+  }).join(" ");
+}
 
-        const ctx = chartRef.current.getContext('2d');
-        const labels = history.map(step => `T${step.time}`);
-        const susceptible = history.map(step => step.aggregate.S);
-        const infected = history.map(step => step.aggregate.I);
-        const recovered = history.map(step => step.aggregate.R);
-        const deceased = history.map(step => step.aggregate.D);
-
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels,
-                datasets: [
-                    { label: 'Susceptible', data: susceptible, borderColor: 'blue', fill: false },
-                    { label: 'Infected', data: infected, borderColor: 'red', fill: false },
-                    { label: 'Recovered', data: recovered, borderColor: 'green', fill: false },
-                    { label: 'Deceased', data: deceased, borderColor: 'black', fill: false }
-                ]
-            },
-            options: {
-                responsive: true,
-                scales: { y: { beginAtZero: true } }
-            }
-        });
-    }, [history]);
-
-    return <canvas ref={chartRef} />;
+export default function SimulationChart({ history }: { history: SimulationSummary[] }) {
+  const total = history.length ? Object.values(history[0].aggregate).reduce((sum, value) => sum + value, 0) : 1;
+  return (
+    <div className="chart-panel">
+      <svg className="simulation-chart" viewBox="0 0 100 100" preserveAspectRatio="none" role="img" aria-label="SEIRD population counts over simulation steps">
+        <g className="chart-grid" aria-hidden="true">
+          {[0, 25, 50, 75, 100].map((value) => <line key={`h${value}`} x1="0" y1={value} x2="100" y2={value} />)}
+          {[0, 25, 50, 75, 100].map((value) => <line key={`v${value}`} x1={value} y1="0" x2={value} y2="100" />)}
+        </g>
+        {history.length > 0 && SERIES.map((series) => (
+          <polyline key={series.key} points={points(history, series.key, total)} fill="none" stroke={series.color} strokeWidth="1.35" vectorEffect="non-scaling-stroke" />
+        ))}
+      </svg>
+      <div className="chart-legend">
+        {SERIES.map((series) => <span key={series.key}><i style={{ background: series.color }} />{series.label}</span>)}
+      </div>
+    </div>
+  );
 }

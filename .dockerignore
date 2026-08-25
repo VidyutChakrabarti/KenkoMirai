@@ -1,0 +1,19 @@
+.git
+.github
+.env
+**/__pycache__
+**/*.py[cod]
+**/.pytest_cache
+**/.next
+**/node_modules
+**/models
+initial datasets/*
+!initial datasets/la_mobilityreports.csv
+!initial datasets/2020_Population/
+initial datasets/2020_Population/*
+!initial datasets/2020_Population/2020_Population_and_Poverty_at_Split_Tract.shp
+!initial datasets/2020_Population/2020_Population_and_Poverty_at_Split_Tract.shx
+!initial datasets/2020_Population/2020_Population_and_Poverty_at_Split_Tract.dbf
+!initial datasets/2020_Population/2020_Population_and_Poverty_at_Split_Tract.prj
+kenko
+assets
